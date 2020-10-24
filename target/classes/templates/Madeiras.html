@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+<title>Estoque</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-expanded navbar-dark bg-primary">
+		<a class="navbar-brand " href="/facaria">Estoque Madeiras</a>
+	</nav>
+
+	<div class="container">
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb" style="background-color: white;">
+				<li class="breadcrumb-item" aria-current="page"><a
+					href="/facaria">Facaria</a>
+					<li class="breadcrumb-item active" aria-current="page">Madeiras</li>
+
+			</ol>
+		</nav>
+	
+		<h4 class="card-title mt-3">Itens em Estoque</h4>
+
+					<div class="row mt-5">
+
+			<div class="col-3">
+				<div>
+					<h5>Tipo</h5>
+				</div>
+			</div>
+
+			<div class="col-3">
+				<div>
+					<h5>Dimensões</h5>
+				</div>
+			</div>
+
+			<div class="col-3">
+				<div>
+					<h5>Quantidade</h5>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row" th:each="madeira : ${madeiras}">
+
+			<div class="col-3">
+				<span th:text="${madeira.tipo}"></span>
+			</div>
+
+			<div class="col-3">
+				<a th:href="@{/madeiras/madeiradetalhe{id}(id = ${madeira.id}) }"
+								class="card-link text-dark"><span
+								th:text="${madeira.dimencoes}"></span></a>
+			</div>
+
+			<div class="col-2">
+				<span class="ml-5" th:text="${madeira.quantidade}"></span>
+			</div>
+			
+			<div th:if="${madeira.quantidade} < 5 and ${madeira.quantidade} > 0"
+							class=" col-2">
+				<span class="badge badge-warning">Fazer Pedido!</span>
+			</div>
+			
+			<div th:if="${madeira.quantidade} == 0" class="col-2">
+					<span class="badge badge-danger">Sem Estoque!</span>
+			</div>
+
+		</div>
+
+		<div class="row mt-5">
+
+			<div class="col-lg-3 mb-2">
+				<a class="btn btn-info w-75" data-toggle="modal"
+								data-target="#modalRetirada">Fazer Retirada</a>
+			</div>
+
+			<div class="col-lg-3 mb-2">
+				<a class="btn btn-success w-75" href="/madeiras/pedido">Fazer Pedido</a>
+			</div>
+
+			<div class="col-lg-3 mb-2">
+				<a class="btn btn-primary w-75" data-toggle="modal"
+								data-target="#modalCadastro">Cadastrar Item</a>
+			</div>
+			
+			<div class="col-lg-3 mb-2">
+				<a class="btn btn-dark w-75" href="/madeiras/reporestoque">Reposição</a>
+			</div>
+
+		</div>
+	
+				</div>
+
+	<!-- Modal -->
+
+	<div class="modal fade" id="modalRetirada" tabindex="-1"
+		aria-labelledby="example1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title" id="example1">Retirada de Estoque</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+
+				<div class="modal-body">
+					<div class="row mb-2" th:each="madeira : ${madeiras}">
+
+						<div class="col-3">
+							<span th:text="${madeira.tipo}"></span>
+						</div>
+
+						<div class="col-3">
+							<span th:text="${madeira.dimencoes}"></span>
+						</div>
+
+						<div class="col-1">
+							<span th:text="${madeira.quantidade}" class=""></span>
+						</div>
+
+						<div class="col-5">
+							<a class="btn btn-info"
+								th:href="${(#mvc.url('MC#fazerRetirada').arg(0, madeira.id)).build()}">Retirar</a>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalCadastro" tabindex="-1"
+		aria-labelledby="exemple2" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+
+					<h5 class="modal-title" id="exemple2">Cadastrar</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+				</div>
+
+				<div class="modal-body">
+
+					<form method="post">
+
+						<div class="form-group row">
+							<div class="col">
+								<label class="my-1 mr-2" for="medidas">Dimensões</label> <input
+									id="medidas" class="form-control" name="dimencoes"
+									placeholder="ex: 325-2500">
+							</div>
+							<div class="col">
+								<label class="my-1 mr-2" for="qntMadeira">Quantidade</label>
+								 <input min="0" id="qntMadeira" class="form-control"
+									type="number" value="0" name="quantidade"
+									placeholder="Quantidade Inicial">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col">
+								<label class="my-1 mr-2" for="tipoMadeira">Tipo</label> <select
+									class="custom-select my-1 mr-sm-2" id="tipoMadeira" name="tipo">
+									<option value="ROTATIVA">ROTATIVA</option>
+									<option value="PLANA">PLANA</option>
+								</select>
+							</div>
+							<div class="col"></div>
+						</div>
+						<div class="form-group row">
+	
+							<div class="col"></div>
+							
+							<div class="col">
+								<button type="submit" class="btn btn-primary">Cadastrar</button>
+							</div>
+							
+							<div class="col"></div>
+							
+						</div>
+
+					</form>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+</body>
+</html>
