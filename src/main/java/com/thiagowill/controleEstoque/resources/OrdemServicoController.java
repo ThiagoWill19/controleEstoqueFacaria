@@ -51,7 +51,7 @@ public class OrdemServicoController {
 		}
 		
 		try {
-			System.out.println(ordem.getFuncionariosRelacionados());
+			ordem.setFuncionariosRelacionados(ordemServicoService.findById(ordem.getId()).getFuncionariosRelacionados());
 			ordemServicoService.save(ordem);
 		}catch (Exception e) {
 			attributes.addFlashAttribute("mensagem", "Verifique se os campos obrigatórios foram preenchidos!");

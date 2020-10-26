@@ -23,16 +23,21 @@ public class ControleProducaoController {
 	}
 	
 	@PostMapping(value = "/controleProducao")
-	public String getIds(int idF, int idO,String opc, RedirectAttributes attributes) {	
+	public String getIds(String idF,String idO,String opc, RedirectAttributes attributes) {	
 		
+		if(idF.isEmpty() || idO.isEmpty()) {
+			attributes.addFlashAttribute("mensagem", "Verifique se os campos obrigatórios foram preenchidos!");
+			return "redirect:/controleProducao";
+		}
 		try {
 			if(opc.equals("CONCLUIR")) {
-				cps.concluirServico(idO, idF);
+				cps.concluirServico(Integer.parseInt(idO), Integer.parseInt(idF));
 			}else {
-				cps.entradaDeServico(idO, idF);
+				cps.entradaDeServico(Integer.parseInt(idO), Integer.parseInt(idF));
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			attributes.addFlashAttribute("mensagem", e.getMessage());
+			return "redirect:/controleProducao";
 		}
 		
 		return "redirect:/facaria/ordens/ordemdetalhe"+idO;

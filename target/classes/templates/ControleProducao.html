@@ -15,18 +15,43 @@
 <title>Facaria</title>
 </head>
 <body>
+	<nav class="navbar navbar-dark bg-primary navbar-expanded">
+		<a class="navbar-brand" href="#">Controle de Produção</a>
+	</nav>
 
-	<div class="m-5">
-		<form method="post">
-			<input type="number" name="idF" placeholder="funcionário">
-			<input type="number" name="idO" placeholder="O.S">
-			<select name="opc" >
-				<option value="ENTRADA">ENTRADA</option>
-				<option value="CONCLUIR">CONCLUIR</option>
-			</select>
-			<button type="submit">CONFIRMAR</button>
-		</form>
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb" style="background-color: white;">
+				<li class="breadcrumb-item" aria-current="page"><a
+					href="/facaria">Facaria</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Controle
+					de produção</li>
+
+			</ol>
+		</nav>
+
+		<div class="m-5">
+		    <th:block th:include="mensagemValidacao"></th:block>
+			<form method="post">
+				<div class="form-group">
+					<input class="form-control" type="number" th:name="idF" placeholder="funcionário">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="number" th:name="idO"  placeholder="O.S">
+				</div>
+				<div class="form-group">
+					<select class="form-control" name="opc">
+						<option value="ENTRADA">ENTRADA</option>
+						<option value="CONCLUIR">CONCLUIR</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-dark" type="submit">CONFIRMAR</button>
+				</div> 
+			</form>
+		</div>
 	</div>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -22,7 +22,13 @@ public class ControleProducaoService {
 		Funcionario funcionario = new Funcionario();
 		funcionario = procurarFuncionario(idFuncionario);
 		OrdemServico ordemServico;
-		ordemServico = ordemServicoService.findById(idOrdemServico);
+		
+		try {
+			ordemServico = ordemServicoService.findById(idOrdemServico);
+		} catch (Exception e) {
+			throw new Exception("ID Ordem de serviço não encontrada"); 
+		}
+
 		if (ordemServico == null) {
 			throw new Exception("O.S não encontrada!");
 		} else {
@@ -60,12 +66,13 @@ public class ControleProducaoService {
 
 	private Funcionario procurarFuncionario(int id) throws Exception {
 		Funcionario f = new Funcionario();
-		f = funcionarioService.findById(id);
-		if (f == null) {
-			throw new Exception("Funcionário não encntrado");
-			
+		
+		try {
+			f = funcionarioService.findById(id);
+		} catch (Exception e) {
+			throw new Exception("Funcionário não encopntrado"); 
 		}
-		else
+		
 			return f;
 	}
 	
@@ -73,11 +80,12 @@ public class ControleProducaoService {
 		Funcionario funcionario = new Funcionario();
 		funcionario = procurarFuncionario(idFuncionario);
 		OrdemServico ordemServico;
-		ordemServico = ordemServicoService.findById(idOrdemServico);
-		
-		if(ordemServico == null) {
-			throw new Exception("O.S não encontrada!");
-		}else {
+		try {
+			ordemServico = ordemServicoService.findById(idOrdemServico);
+		} catch (Exception e) {
+			throw new Exception("ID Ordem de serviço não encontrada"); 
+		}
+			
 			if(ordemServico.getFuncionarioAtual() == null) {
 				throw new Exception("O.S não está aberta!");
 			}else {
@@ -104,4 +112,4 @@ public class ControleProducaoService {
 		
 	}
 
-}
+
