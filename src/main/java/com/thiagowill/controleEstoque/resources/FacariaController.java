@@ -33,7 +33,9 @@ public class FacariaController {
 		ModelAndView mv = new ModelAndView("facaria");
 		mv.addObject("pedidos",pedidosMadeiraService.AguardandoEntrega());
 		mv.addObject("madeiras", madeiraService.verirficarQuantidadeMadeira());
-		mv.addObject("ordens", ordemService.listarOrdensEmAberto());
+		mv.addObject("ordensAtivas", ordemService.ordensEmAberto());
+		mv.addObject("ordensAguardando", ordemService.ordensEmAguardo());
+		mv.addObject("ordensEmProcessos", ordemService.ordensEmProcessos());
 		return mv;
 	}
 	

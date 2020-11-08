@@ -1,11 +1,11 @@
 package com.thiagowill.controleEstoque.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thiagowill.controleEstoque.enums.Processos;
 import com.thiagowill.controleEstoque.models.OrdemServico;
 import com.thiagowill.controleEstoque.repositories.OrdemServicoRepository;
 
@@ -39,13 +39,33 @@ public class OrdemServicoService {
 		return ordemServicoRepository.findByEmpresaIgnoreCaseContaining(empresa);
 	}
 	
-	public List<OrdemServico> listarOrdensEmAberto(){
-		ArrayList<OrdemServico> lista = new ArrayList<>();
+	public Integer ordensEmAberto(){
+		Integer qntOrdensEmAberto = 0;
 		for(OrdemServico ordemServico : findAll()) {
-			if(ordemServico.isStatusFinalizacao() == false) {
-				lista.add(ordemServico);
+			if(ordemServico.isStatusFinalizacao() == false && ordemServico.getProcessos() != Processos.FINALIZADO) {
+				qntOrdensEmAberto ++;
 			}
 		}
-		return lista;
+		return qntOrdensEmAberto;
+	}
+	
+	public Integer ordensEmAguardo() {
+		
+		Integer qntOrdensEmAguardo = 0;
+		for(OrdemServico ordemServico : findAll()) {
+			if( ordemServico.getFuncionarioAtual() == null && ordemServico.getProcessos() != Processos.FINALIZADO ) qntOrdensEmAguardo ++;
+		}
+		
+		return qntOrdensEmAguardo;
+	}
+	
+	public Integer ordensEmProcessos() {
+		
+		Integer qntOrdensEmProcessos = 0;
+		for(OrdemServico ordemServico : findAll()) {
+			if( ordemServico.getFuncionarioAtual() != null && ordemServico.getProcessos() != Processos.FINALIZADO ) qntOrdensEmProcessos ++;
+		}
+		
+		return qntOrdensEmProcessos;
 	}
 }
