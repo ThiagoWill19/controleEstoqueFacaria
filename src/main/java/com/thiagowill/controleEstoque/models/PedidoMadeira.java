@@ -1,6 +1,7 @@
 package com.thiagowill.controleEstoque.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +17,10 @@ public class PedidoMadeira implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private final String nomePedido = "MADEIRA";
-	private String data;
+	private LocalDate data;
 	private String listaPedido;
 	private boolean statusEntrega;
+	
 	
 	
 	public PedidoMadeira() {
@@ -26,7 +28,7 @@ public class PedidoMadeira implements Serializable{
 	}
 
 
-	public PedidoMadeira(int id, String data, boolean statusEntrega) {
+	public PedidoMadeira(int id, LocalDate data, boolean statusEntrega) {
 		super();
 		this.id = id;
 		this.data = data;
@@ -44,12 +46,12 @@ public class PedidoMadeira implements Serializable{
 	}
 
 
-	public String getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
 
-	public void setData(String data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 

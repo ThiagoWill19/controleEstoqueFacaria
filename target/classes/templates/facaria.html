@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container">
 			<a class="navbar-brand h1 " href="#">Facaria</a>
 
@@ -71,20 +71,24 @@
 		</nav>
 	
 		<div class="row mt-5">
-						<div class="col-3"></div>
-			<div class="col-6">
-				<div class="card text-white bg-info">
+			<div class="col-md-12 col-lg-3">
+				<div class="card border-dark" style="background-color: rgb(19, 80, 91); ">
+					<h5 class="text-white text-center mt-2">Pedidos em espera:</h5>
 					<div class="card-body">
-						<h5>Aplicação ainda em desenvolvimento.</h5>
-						<h6>
-							Somente área de estoque de madeira <br> ferramental, Configurações e
-							funcionários disponível para teste.
-						</h6>
+						
+						<div class="row mb-3" th:each="pedido : ${pedidos}">
+							<div class="card border-dark text-white p-3 w-100" style="background-color: rgb(17, 157, 164); ">
+								<p>
+									Pedido: <span th:text="${pedido.nomePedido}"></span><br>
+								    Data do pedido: <span th:text="${pedido.data}"></span>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-3"></div>
+			
 		</div>
 	
 				</div>

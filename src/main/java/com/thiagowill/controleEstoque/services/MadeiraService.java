@@ -68,6 +68,7 @@ public class MadeiraService {
 
 	public boolean EnviarPedido(ArrayList<Madeira> listaPedido) {
 		
+		
 		String listaPedidos = "";
 
 		for (Madeira m : listaPedido) {
@@ -77,7 +78,7 @@ public class MadeiraService {
 		if(listaPedidos.equals(""))return false;
 		PedidoMadeira pedidoMadeira = new PedidoMadeira();
 		pedidoMadeira.setListaPedido(listaPedidos);
-		pedidoMadeira.setData("" + LocalDate.now());
+		pedidoMadeira.setData(LocalDate.now());
 		pedidoMadeira.setStatusEntrega(false);
 		
 		mailService.sendMail(listaPedidos);

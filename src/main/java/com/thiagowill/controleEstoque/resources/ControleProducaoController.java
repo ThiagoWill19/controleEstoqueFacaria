@@ -39,8 +39,8 @@ public class ControleProducaoController {
 			attributes.addFlashAttribute("mensagem", e.getMessage());
 			return "redirect:/controleProducao";
 		}
-		
-		return "redirect:/facaria/ordens/ordemdetalhe"+idO;
+		attributes.addFlashAttribute("mensagemC", "Operação concluida!");
+		return "redirect:/controleProducao";
 	}
 		
 	

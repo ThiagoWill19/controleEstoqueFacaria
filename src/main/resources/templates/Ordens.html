@@ -39,31 +39,42 @@
 			</form>
 		</nav>
 		<th:block th:include="mensagemValidacao"></th:block>
-		<div class="card border-dark mt-3 col-lg-4 col-md-12" th:each="ordem :${ordens}">
+		
+		<div class="row mt-3">
+	
+			<div class="col">
+				<h4>Empresa</h4>
+			</div>
+			<div class="col">
+				<h4>Trabalho</h4>
+			</div>
+			<div class="col">
+				<h4>Referência</h4>
+			</div>
+			<div class="col">
+				<h4>Tipo</h4>
+			</div>
+		</div>
+		<div class=" mt-2 row font-weight-bold" th:each="ordem :${ordens}">
 			
-				<div class="card-body">
-					<p class="card-subtitle mb-2 text-muted" style="font-size: 0.8 rem;">
-						<a class="card-link" th:href="@{/facaria/ordens/ordemdetalhe{id}(id = ${ordem.id})}"><h4 class="card-title" th:text="${ordem.empresa}"></h4></a>
-						<p>
-							<span class="text-bold">ID:</span>
-					    	<span class="text-danger" th:text="${ordem.id}"></span>
-						</p>
-						
-						<p>
-							<i class="material-icons">work_outline</i>
-							<span th:text="${ordem.nomeDoTrabalho}"></span>
-						</p>
-						<p>
-							<i class="material-icons">description</i>
-							<span th:text="${ordem.descricao}"></span>
-						</p>
-						<p>
-							<i class="material-icons">local_offer</i>
-							<span th:text="${ordem.tipo}"></span>
-						</p>
-						
-					</p>
-				</div>
+			<div class="col">
+				<h5>
+				<span class="text-bold">ID:</span>
+				<span class="text-danger mr-2" th:text="${ordem.id}"></span>			
+				<a class="card-link  " th:href="@{/facaria/ordens/ordemdetalhe{id}(id = ${ordem.id})}"><span class="card-title" th:text="${ordem.empresa}"></span></a>
+				</h5>
+			</div>
+			<div class="col">		
+				<h5><span  th:text="${ordem.nomeDoTrabalho}"></span></h5>
+			</div>
+			<div class="col">
+				<h5><span  th:text="${ordem.descricao}"></span></h5>
+			</div>
+			<div class="col">
+			    <h5>			 
+					<span th:text="${ordem.tipo}"></span>
+				</h5>	
+			</div>	
 			
 		</div>
 		
