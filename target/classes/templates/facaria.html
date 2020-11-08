@@ -55,7 +55,7 @@
 
 			</div>
 		</div>
-
+		
 
 	</nav>
 
@@ -72,13 +72,18 @@
 	
 		<div class="row mt-5">
 			<div class="col-md-12 col-lg-3">
-				<div class="card border-dark" style="background-color: rgb(19, 80, 91); ">
+			
+				<div class="card border-dark" style="background-color: rgb(19, 80, 91); width: 260px; height: 350px;">
+					
 					<h5 class="text-white text-center mt-2">Pedidos em espera:</h5>
-					<div class="card-body">
+					
+					<div class="card-body" style=" overflow: auto;">
 						
 						<div class="row mb-3" th:each="pedido : ${pedidos}">
+							
 							<div class="card border-dark text-white p-3 w-100" style="background-color: rgb(17, 157, 164); ">
-								<p>
+								
+								<p class="mb-0">
 									Pedido: <span th:text="${pedido.nomePedido}"></span><br>
 								    Data do pedido: <span th:text="${pedido.data}"></span>
 								</p>
@@ -87,11 +92,58 @@
 					</div>
 				</div>
 			</div>
-
+			
+			<div class="col-md-12 col-lg-3">
+			
+				<div class="card border-dark" style="background-color: rgb(19, 80, 91); width: 260px; height: 350px;" >
+					
+					<h5 class="text-white text-center mt-2">Status Madeiras</h5>
+					
+					<div class="card-body" style=" overflow: auto;">
+					
+						<div class="row mb-3" th:each="madeira : ${madeiras}">
+							<div class="card border-dark text-white p-3 w-100" 
+							style= "background-color: rgb(17, 157, 164); " th:if="${madeiras.size() < 1}">
+								<p> Estoque OK!</p>
+							</div>
+							
+							<div class="card alert-danger  p-3 w-100" 
+							  th:unless="${madeiras.size() < 1 } ">
+								<p class="font-weight-bold mb-0">Pedir: <span th:text="${madeira.dimencoes}"></span></p>
+								<p class="font-weight-bold mb-0">Quantidade atual: <span class="badge badge-light" th:text="${madeira.quantidade}"></span></p>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-12 col-lg-3">
+			
+				<div class="card border-dark" style="background-color: rgb(19, 80, 91); width: 260px; height: 350px;" >
+					
+					<h5 class="text-white text-center mt-2">Ordens de Serviços</h5>
+					
+					<div class="card-body" style=" overflow: auto;">
+					
+						<div class="row mb-3">
+							<div class="card border-dark text-white p-3 w-100" 
+							style= "background-color: rgb(17, 157, 164);">
+								<p>
+									Ordens ativas:  <span class="badge badge-light" th:text="${ordens.size()}"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 		</div>
+			
+	</div>
 	
-				</div>
+
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

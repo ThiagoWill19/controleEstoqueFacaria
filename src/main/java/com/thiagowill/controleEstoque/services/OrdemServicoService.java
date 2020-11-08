@@ -1,5 +1,6 @@
 package com.thiagowill.controleEstoque.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,13 @@ public class OrdemServicoService {
 		return ordemServicoRepository.findByEmpresaIgnoreCaseContaining(empresa);
 	}
 	
-
+	public List<OrdemServico> listarOrdensEmAberto(){
+		ArrayList<OrdemServico> lista = new ArrayList<>();
+		for(OrdemServico ordemServico : findAll()) {
+			if(ordemServico.isStatusFinalizacao() == false) {
+				lista.add(ordemServico);
+			}
+		}
+		return lista;
+	}
 }

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thiagowill.controleEstoque.services.MadeiraService;
+import com.thiagowill.controleEstoque.services.OrdemServicoService;
 import com.thiagowill.controleEstoque.services.PedidoMadeiraService;
 
 
@@ -15,6 +17,10 @@ public class FacariaController {
 	
 	@Autowired
 	private PedidoMadeiraService pedidosMadeiraService;
+	@Autowired
+	private OrdemServicoService ordemService;
+	@Autowired
+	private MadeiraService madeiraService;
 	
 	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public ModelAndView inicial() {
@@ -26,6 +32,10 @@ public class FacariaController {
 	public ModelAndView facaria() {
 		ModelAndView mv = new ModelAndView("facaria");
 		mv.addObject("pedidos",pedidosMadeiraService.AguardandoEntrega());
+		mv.addObject("madeiras", madeiraService.verirficarQuantidadeMadeira());
+		mv.addObject("ordens", ordemService.listarOrdensEmAberto());
 		return mv;
 	}
+	
+	
 }

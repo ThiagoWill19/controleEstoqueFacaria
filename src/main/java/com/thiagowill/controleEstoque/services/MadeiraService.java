@@ -2,6 +2,7 @@ package com.thiagowill.controleEstoque.services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,18 @@ public class MadeiraService {
 			}
 				
 		}
-	}	
+	}
+	
+	public List<Madeira> verirficarQuantidadeMadeira(){
+		ArrayList<Madeira> madeirasAbaixoDoMinimo = new ArrayList<>();
+		for(Madeira madeira : findAll()) {
+			if(madeira.getQuantidade() < 4) {
+				madeirasAbaixoDoMinimo.add(madeira);
+			}
+		}
+		return madeirasAbaixoDoMinimo;
+			
+		
+	}
 
 }

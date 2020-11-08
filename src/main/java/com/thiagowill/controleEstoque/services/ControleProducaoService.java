@@ -57,7 +57,9 @@ public class ControleProducaoService {
 				default:
 					throw new FuncaoNaoReconhecidaException();
 				}
-
+				if(ordemServico.getProcessos() == Processos.FINALIZADO)
+					ordemServico.setStatusFinalizacao(true);
+				else ordemServico.setStatusFinalizacao(false);
 				ordemServicoService.save(ordemServico);
 			}
 
@@ -101,6 +103,9 @@ public class ControleProducaoService {
 						default: throw new FuncaoNaoReconhecidaException();
 					}
 					ordemServico.setFuncionarioAtual(null);
+					if(ordemServico.getProcessos() == Processos.FINALIZADO)
+						ordemServico.setStatusFinalizacao(true);
+					else ordemServico.setStatusFinalizacao(false);
 					if(!ordemServico.getFuncionariosRelacionados().contains(funcionario)) {
 						ordemServico.getFuncionariosRelacionados().add(funcionario);
 					}

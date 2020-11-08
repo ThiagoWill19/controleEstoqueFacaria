@@ -30,6 +30,7 @@ public class OrdemServico implements Serializable {
 	@NotBlank
 	private String tipo;
 	private Processos processos;
+	private boolean statusFinalizacao;
 	
 	@OneToMany
 	private List<Funcionario> funcionariosRelacionados = new ArrayList<>();
@@ -116,6 +117,16 @@ public class OrdemServico implements Serializable {
 
 	public void setFuncionarioAtual(Funcionario funcionarioAtual) {
 		this.funcionarioAtual = funcionarioAtual;
+	}
+	
+	
+
+	public boolean isStatusFinalizacao() {
+		return statusFinalizacao;
+	}
+
+	public void setStatusFinalizacao(boolean statusFinalizacao) {
+		this.statusFinalizacao = statusFinalizacao;
 	}
 
 	@Override
