@@ -39,6 +39,7 @@ public class OrdemServicoService {
 		return ordemServicoRepository.findByEmpresaIgnoreCaseContaining(empresa);
 	}
 	
+	
 	public Integer ordensEmAberto(){
 		Integer qntOrdensEmAberto = 0;
 		for(OrdemServico ordemServico : findAll()) {
@@ -49,6 +50,7 @@ public class OrdemServicoService {
 		return qntOrdensEmAberto;
 	}
 	
+	
 	public Integer ordensEmAguardo() {
 		
 		Integer qntOrdensEmAguardo = 0;
@@ -58,6 +60,7 @@ public class OrdemServicoService {
 		
 		return qntOrdensEmAguardo;
 	}
+	
 	
 	public Integer ordensEmProcessos() {
 		
