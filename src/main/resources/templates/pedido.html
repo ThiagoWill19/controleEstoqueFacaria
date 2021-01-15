@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>Facaria</title>
+  </head>
+  <body>
+    
+    	<nav class="navbar navbar-dark bg-primary sticky-top ">
+			<a class="navbar-brand" href="/funcionarios">Pedido</a>
+		</nav>
+		
+		<div class="container">
+		
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb" style="background-color: white;">
+					<li class="breadcrumb-item" aria-current="page"><a
+					href="/facaria">Facaria</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a
+					href="/pedidos">Pedidos</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Pedido</li>
+				</ol>
+			</nav>
+			
+			<h3>Pedido</h3>
+			
+			<div class="mt-3">
+				<form method="post">
+					
+					<div class="form-group">
+						<label class="font-weight-bold" for="id">ID</label>
+						<input id="id" class="form-control w-25" th:value="${pedido.id}" readonly="readonly">
+					</div>
+					
+					<div class="form-group">
+						<label class="font-weight-bold" for="pedido">Pedido</label>
+						<input type="text" id="pedido" class="form-control w-25" th:value="${pedido.nomePedido}" th:name="nomePedido">
+					</div>
+					
+					<div class="form-group">
+						<label class="font-weight-bold" for="data">Data Do Pedido</label>
+						<input type="date" id="data" class="form-control w-25" th:value="${pedido.data}" th:name="data">
+					</div>
+					
+					<div class="form-group">
+						<label class="font-weight-bold" for="listaPedido">Lista Do Pedido</label>
+						<textarea  rows="7" cols="500" id="listaPedido" class="form-control" th:text="${pedido.listaPedido}" th:name="listaPedido" readonly="readonly"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<span class="font-weight-bold" for="status">Status Da Entrega</span><br>
+						<input type="radio" id=""  th:value="${pedido.statusEntrega == false}" th:name="statusEntrega"> Aguardando <br>
+						<input type="radio"   th:value="${pedido.statusEntrega == true}" th:name="statusEntrega"> Entregue <br>
+					</div>
+					<div class="form-group mt-5">
+						<button type="submit" class="btn btn-success mr-3" >Salvar</button>
+						<a class="btn btn-danger mr-3" th:href="@{/remover{id}(id = ${pedido.id})}">Remover</a>
+						<a class="btn btn-secondary" href="/pedidos">Voltar</a>
+					</div>
+				</form>
+			</div>
+		</div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
